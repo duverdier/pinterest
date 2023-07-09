@@ -11,6 +11,12 @@
         {% endblock %}
     </head>
     <body>
+        <nav class="">
+            <ul>
+                <li><a href="{{ path('app_home') }}" class="">Home</a></li>
+                <li><a href="{{ path('app_pins_create') }}" class="">New pin</a></li>
+            </ul>
+        </nav>
         {% block body %}{% endblock %}
     </body>
 </html>
