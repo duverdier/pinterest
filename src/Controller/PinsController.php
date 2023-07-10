@@ -57,4 +57,12 @@ class PinsController extends AbstractController
         }
         return $this->render('pins/edit.html.twig', ['form' => $form->createView(), 'pin' => $pin]);
     }
+
+    #[Route('/pins/{id}/delete', name: 'app_pins_delete', requirements: ['id' => '[0-9]+'], methods: 'GET|DELETE')]
+    public function delete(Pin $pin, EntityManagerInterface $em): Response
+    {
+        $em->remove($pin);
+        $em->flush();
+        return $this->redirectToRoute('app_home');
+    }
 }

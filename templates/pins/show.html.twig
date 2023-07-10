@@ -9,7 +9,11 @@
       <p>{{ pin.description }}</p>
   </article>
 
-
-  <a href="{{ path('app_pins_edit', {id: pin.id}) }}" class="">Edit </a>
+  <a href="{{ path('app_pins_edit', {id: pin.id}) }}" class="">Edit </a>|
+  <a href="#" onclick="event.preventDefault(); document.getElementById('js-pin-delete-form').submit();" class="">Delete</a>|
   <a href="{{ path('app_home') }}" class="">Go back</a>
+
+  <form id="js-pin-delete-form" action="{{ path('app_pins_delete', {id: pin.id}) }}" style="display:none;">
+    <input type="hidden" name="_method" class="DELETE">
+  </form>
 {% endblock %}
