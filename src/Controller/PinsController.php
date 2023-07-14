@@ -36,6 +36,8 @@ class PinsController extends AbstractController
             $em->persist($pin);
             $em->flush();
 
+            $this->addFlash('success', 'Pin successfully created!');
+
             return $this->redirectToRoute('app_home');
         }
         return $this->render('pins/create.html.twig', ['form' => $form->createView()]);
@@ -45,6 +47,7 @@ class PinsController extends AbstractController
     public function edit(Pin $pin, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(PinType::class, $pin, [
+            'action' => $this->generateUrl('app_pins_edit', ['id' => $pin->getId()]),
             'method' => 'PUT'
         ]);
 
@@ -52,6 +55,8 @@ class PinsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+
+            $this->addFlash('success', 'Pin successfully updated!');
 
             return $this->redirectToRoute('app_home');
         }
@@ -64,6 +69,7 @@ class PinsController extends AbstractController
         if ($this->isCsrfTokenValid('pins.deletion' . $pin->getId(), $request->query->get('csrf_token') )) {
             $em->remove($pin);
             $em->flush();
+            $this->addFlash('info', 'Pin successfully deleted!');
         }
         return $this->redirectToRoute('app_home');
     }

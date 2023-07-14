@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
 
 {% block title 'Edit pin #' ~ pin.id %}
 
@@ -6,6 +6,6 @@
 
   <h1 class="">Edit pin #{{  pin.id }}</h1>
 
-  {{ include('pins/_form.html.twig', { submitButtonText: 'Update Pin' }) }}
+  {{ include('pins/_form.html.twig', { submitButtonText: 'Update Pin' }, ) }}
 
 {% endblock %}
